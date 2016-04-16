@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160416012044) do
+ActiveRecord::Schema.define(version: 20160416012839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20160416012044) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "operaciones", force: :cascade do |t|
+    t.string   "realizado_por"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "trabajadore_id"
+  end
+
+  add_index "operaciones", ["trabajadore_id"], name: "index_operaciones_on_trabajadore_id", using: :btree
+
   create_table "trabajadores", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -32,4 +41,5 @@ ActiveRecord::Schema.define(version: 20160416012044) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "operaciones", "trabajadores"
 end

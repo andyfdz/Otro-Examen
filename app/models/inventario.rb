@@ -1,3 +1,4 @@
 class Inventario < ActiveRecord::Base
-	validates :serie_id, presence: true, uniqueness: true
+	belongs_to :operacione
+	validates :serie_id presence: true, uniqueness: true, not null
 end
